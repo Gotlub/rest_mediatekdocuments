@@ -82,6 +82,21 @@ class Controle{
         }
     }
 
+    /** -> a supprimer
+     * requete arrivée en POST (insert) inutile en ce moment !!!!
+     * @param string $table nom de la table
+     * @param array $id du champs
+     */
+    public function postId($table, $id){
+        $champs = [ "id" => $id];
+        $result = $this->accessBDD->insertOne($table, $champs);	
+        if ($result == null || $result == false){
+            $this->reponse(400, "requete invalide");
+        }else{	
+            $this->reponse(200, "OK");
+        }
+    }
+
     /**
      * requete arrivée en PUT (update)
      * @param string $table nom de la table

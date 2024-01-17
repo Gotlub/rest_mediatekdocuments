@@ -68,6 +68,7 @@ class AccessBDD {
                     return $this->selectExemplairesRevue($champs['id']);
                 default:                    
                     // cas d'un select sur une table avec recherche sur des champs
+                    $champs = str_replace("-", " ", $champs);
                     return $this->selectTableOnConditons($table, $champs);					
             }				
         }else{

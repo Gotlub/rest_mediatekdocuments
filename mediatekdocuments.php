@@ -28,10 +28,20 @@ if(!isset($_SERVER['PHP_AUTH_USER']) || (isset($_SERVER['PHP_AUTH_USER']) &&
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
         $controle->get($table, $champs);
     }else if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $controle->post($table, $champs);
+        /*if($table == "livresdvd") {
+            $table = "livres_dvd";
+        }*/
+        if(isset($id)){
+            $controle->postId($table, $id);
+        }else{
+            $champs = str_replace("-", " ", $champs);
+            $controle->post($table, $champs);
+        }
     }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+        $champs = str_replace("-", " ", $champs);
         $controle->put($table, $id, $champs);
     }else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+        $champs = str_replace("-", " ", $champs);
         $controle->delete($table, $champs);
     }
 
