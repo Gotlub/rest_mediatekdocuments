@@ -22,7 +22,7 @@ if(!isset($_SERVER['PHP_AUTH_USER']) || (isset($_SERVER['PHP_AUTH_USER']) &&
                filter_input(INPUT_POST, 'champs', FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
     if($champs != ""){
         $champs = json_decode($champs, true);
-        $champs = str_replace("-", " ", $champs); //c'est tres tres sale
+        //$champs = str_replace("-", " ", $champs); //c'est tres tres sale
     }
 
     // traitement suivant le verbe HTTP utilisé

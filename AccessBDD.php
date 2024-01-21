@@ -38,6 +38,8 @@ class AccessBDD {
                     return $this->selectAllDvd();
                 case "revue" :
                     return $this->selectAllRevues();
+                case "maxcommande" :
+                    return $this->selectMaxCommande();
                 case "exemplaire" :
                     return $this->selectExemplairesRevue();
                 case "genre" :
@@ -70,7 +72,6 @@ class AccessBDD {
                     return $this->selectCommandesDocument($champs['idLivreDvd']);
                 default:                    
                     // cas d'un select sur une table avec recherche sur des champs
-                    $champs = str_replace("-", " ", $champs);
                     return $this->selectTableOnConditons($table, $champs);					
             }				
         }else{
@@ -176,6 +177,11 @@ class AccessBDD {
         return $this->conn->query($req, $param);
     }
 
+    public function selectMaxCommande(){
+        $req = "Select MAX(id) AS id FROM commande";
+        return $this->conn->query($req);
+    }
+
      /**
      * récupération de toutes les commandes d'une dvd_livre
      * @param string $idLivreDvd id du livre_dvd
@@ -190,7 +196,7 @@ class AccessBDD {
         $req .= "from commandedocument cd join commande c on cd.id=c.id ";
         $req .= "join suivi s on cd.idsuivi=s.id ";
         $req .= "where cd.idLivreDvd = :idLivreDvd ";
-        $req .= "order by c.dateCommande DESC";		
+        $req .= "order by c.dateCommande DESC";	
         return $this->conn->query($req, $param);
     }		
 
