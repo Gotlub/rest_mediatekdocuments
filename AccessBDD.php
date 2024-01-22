@@ -40,6 +40,12 @@ class AccessBDD {
                     return $this->selectAllRevues();
                 case "maxcommande" :
                     return $this->selectMaxCommande();
+                case "maxlivre" :
+                    return $this->selectMaxLivre();
+                case "maxdvd" :
+                    return $this->selectMaxDvd();
+                case "maxrevue" :
+                    return $this->selectMaxRevue();
                 case "exemplaire" :
                     return $this->selectExemplairesRevue();
                 case "genre" :
@@ -177,8 +183,43 @@ class AccessBDD {
         return $this->conn->query($req, $param);
     }
 
+    /**
+     * Retourne la plus grande id de la table commande
+     *
+     * @return lignes de la requete 
+     */
     public function selectMaxCommande(){
         $req = "Select MAX(id) AS id FROM commande";
+        return $this->conn->query($req);
+    }
+
+    /**
+     * Retourne la plus grande id de la table livre
+     *
+     * @return lignes de la requete 
+     */
+    public function selectMaxLivre(){
+        $req = "Select MAX(id) AS id FROM livre";
+        return $this->conn->query($req);
+    }
+
+    /**
+     * Retourne la plus grande id de la table dvd
+     *
+     * @return lignes de la requete 
+     */
+    public function selectMaxDvd(){
+        $req = "Select MAX(id) AS id FROM dvd";
+        return $this->conn->query($req);
+    }
+
+    /**
+     * Retourne la plus grande id de la table revue
+     *
+     * @return lignes de la requete 
+     */
+    public function selectMaxRevue(){
+        $req = "Select MAX(id) AS id FROM revue";
         return $this->conn->query($req);
     }
 
