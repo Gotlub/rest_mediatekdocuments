@@ -255,11 +255,76 @@ class AccessBDD {
                 $requete .= "$key=:$key and ";
             }
             // (enlève le dernier and)
-            $requete = substr($requete, 0, strlen($requete)-5);   
+            $requete = substr($requete, 0, strlen($requete)-5);
             return $this->conn->execute($requete, $champs);		
         }else{
             return null;
         }
+    }
+
+    public function deleteLivre($table, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsDvdLivre = [ "id" => $champs["Id"]];
+        $champsLivre = [ "id" => $champs["Id"], "ISBN" => $champs["Isbn"],
+                "auteur" => $champs["Auteur"], "collection" => $champs["Collection"]];
+        $result = $this->delete("livre", $champsLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        $result = $this->delete( "livres_dvd", $champsDvdLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return $this->delete("document", $champsDocument);
+    }
+
+    public function deleteDvd($table, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsDvdLivre = [ "id" => $champs["Id"]];
+        $champsDvd = [ "id" => $champs["Id"], "synopsis" => $champs["Synopsis"],
+                "realisateur" => $champs["Realisateur"], "duree" => $champs["Duree"]];
+        $result = $this->delete("dvd", $champsDvd);
+        if ($result == null || $result == false){
+            return null;
+        }
+        $result = $this->delete( "livres_dvd", $champsDvdLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return $this->delete("document", $champsDocument);
+    }
+
+    public function deleteCommande($table, $champs)
+    {
+        $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
+            "montant" => $champs["Montant"]];
+        $champsCommandeDocument = [ "id" => $champs["Id"], "nbExemplaire" => $champs["NbExemplaire"],
+                "idLivreDvd" => $champs["IdLivreDvd"], "idsuivi" => $champs["IdSuivi"]];
+        $result = $this->delete("commandedocument", $champsCommandeDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->delete( "commande", $champsCommande);
+    }
+
+    public function deleteRevue($table, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsRevue = [ "id" => $champs["Id"], "periodicite" => $champs["Periodicite"],
+                "delaiMiseADispo" => $champs["DelaiMiseADispo"]];
+        $result = $this->delete("revue", $champsRevue);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->delete( "document", $champsDocument);
     }
 
     /**
@@ -283,12 +348,80 @@ class AccessBDD {
             }
             // (enlève la dernière virgule)
             $requete = substr($requete, 0, strlen($requete)-1);
-            $requete .= ");";	
+            $requete .= ");";
             return $this->conn->execute($requete, $champs);		
         }else{
             return null;
         }
     }
+
+
+    public function insertLivre($table, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsDvdLivre = [ "id" => $champs["Id"]];
+        $champsLivre = [ "id" => $champs["Id"], "ISBN" => $champs["Isbn"],
+                "auteur" => $champs["Auteur"], "collection" => $champs["Collection"]];
+        $result = $this->insertOne("document", $champsDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        $result = $this->insertOne( "livres_dvd", $champsDvdLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return $this->insertOne("livre", $champsLivre);
+    }
+
+    public function insertDvd($table, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsDvdLivre = [ "id" => $champs["Id"]];
+        $champsDvd = [ "id" => $champs["Id"], "synopsis" => $champs["Synopsis"],
+                "realisateur" => $champs["Realisateur"], "duree" => $champs["Duree"]];
+        $result = $this->insertOne("document", $champsDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        $result = $this->insertOne( "livres_dvd", $champsDvdLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return $this->insertOne("dvd", $champsDvd);
+    }
+
+    public function insertCommande($table, $champs)
+    {
+        $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
+            "montant" => $champs["Montant"]];
+        $champsCommandeDocument = [ "id" => $champs["Id"], "nbExemplaire" => $champs["NbExemplaire"],
+                "idLivreDvd" => $champs["IdLivreDvd"], "idsuivi" => $champs["IdSuivi"]];
+        $result = $this->insertOne("commande", $champsCommande);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->insertOne( "commandedocument", $champsCommandeDocument);
+    }
+
+    public function insertRevue($table, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsRevue = [ "id" => $champs["Id"], "periodicite" => $champs["Periodicite"],
+                "delaiMiseADispo" => $champs["DelaiMiseADispo"]];
+        $result = $this->insertOne("document", $champsDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->insertOne( "revue", $champsRevue);
+    }
+
+
 
     /**
      * modification d'une ligne dans une table
@@ -312,6 +445,71 @@ class AccessBDD {
         }else{
             return null;
         }
+    }
+
+    public function updateLivre($table, $id, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsDvdLivre = [ "id" => $champs["Id"]];
+        $champsLivre = [ "id" => $champs["Id"], "ISBN" => $champs["Isbn"],
+                "auteur" => $champs["Auteur"], "collection" => $champs["Collection"]];
+        $result = $this->updateOne("document", $id, $champsDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        $result = $this->updateOne( "livres_dvd", $id, $champsDvdLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return $this->updateOne("livre", $id, $champsLivre);
+    }
+
+    public function updateDvd($table, $id, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsDvdLivre = [ "id" => $champs["Id"]];
+        $champsDvd = [ "id" => $champs["Id"], "synopsis" => $champs["Synopsis"],
+            "realisateur" => $champs["Realisateur"], "duree" => $champs["Duree"]];
+        $result = $this->updateOne("document", $id, $champsDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        $result = $this->updateOne( "livres_dvd", $id, $champsDvdLivre);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return $this->updateOne("dvd", $id, $champsDvd);
+    }
+
+    public function updateCommande($table, $id, $champs)
+    {
+        $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
+            "montant" => $champs["Montant"]];
+        $champsCommandeDocument = [ "id" => $champs["Id"], "nbExemplaire" => $champs["NbExemplaire"],
+                "idLivreDvd" => $champs["IdLivreDvd"], "idsuivi" => $champs["IdSuivi"]];
+        $result = $this->updateOne("commande",$id, $champsCommande);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->updateOne( "commandedocument",$id, $champsCommandeDocument);
+    }
+
+    public function updateRevue($table, $id, $champs)
+    {
+        $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
+            "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
+            "idPublic" => $champs["IdPublic"], "idGenre" => $champs["IdGenre"]];
+        $champsRevue = [ "id" => $champs["Id"], "periodicite" => $champs["Periodicite"],
+                "delaiMiseADispo" => $champs["DelaiMiseADispo"]];
+        $result = $this->updateOne("document", $id, $champsDocument);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->updateOne( "revue",$id, $champsRevue);
     }
 
 }
