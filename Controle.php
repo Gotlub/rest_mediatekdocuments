@@ -61,13 +61,13 @@ class Controle{
      */
     public function delete($table, $champs){
         if ($table == "livre"){
-            $result = $this->accessBDD->deleteLivre($table, $champs);	
+            $result = $this->accessBDD->deleteLivre($champs);	
         }elseif ($table == "dvd"){
-            $result = $this->accessBDD->deleteDvd($table, $champs);
+            $result = $this->accessBDD->deleteDvd($champs);
         }elseif ($table == "revue"){
-            $result = $this->accessBDD->deleteRevue($table, $champs);
+            $result = $this->accessBDD->deleteRevue($champs);
         }elseif ($table == "commandedocument"){
-            $result = $this->accessBDD->deleteCommande($table, $champs);
+            $result = $this->accessBDD->deleteCommande($champs);
         }else{
             $result = $this->accessBDD->delete($table, $champs);
         }
@@ -85,13 +85,13 @@ class Controle{
      */
     public function post($table, $champs){
         if ($table == "livre"){
-            $result = $this->accessBDD->insertLivre($table, $champs);	
+            $result = $this->accessBDD->insertLivre($champs);	
         }elseif ($table == "dvd"){
-            $result = $this->accessBDD->insertDvd($table, $champs);
+            $result = $this->accessBDD->insertDvd($champs);
         }elseif ($table == "revue"){
-            $result = $this->accessBDD->insertRevue($table, $champs);
+            $result = $this->accessBDD->insertRevue($champs);
         }elseif ($table == "commandedocument"){
-            $result = $this->accessBDD->insertCommande($table, $champs);
+            $result = $this->accessBDD->insertCommande($champs);
         }else{
             $result = $this->accessBDD->insertOne($table, $champs);	
         }
@@ -111,13 +111,13 @@ class Controle{
      */
     public function put($table, $id, $champs){
         if ($table == "livre"){
-            $result = $this->accessBDD->updateLivre($table, $id, $champs);	
+            $result = $this->accessBDD->updateLivre($id, $champs);	
         }elseif ($table == "dvd"){
-            $result = $this->accessBDD->updateDvd($table, $id, $champs);
+            $result = $this->accessBDD->updateDvd($id, $champs);
         }elseif ($table == "revue"){
-            $result = $this->accessBDD->updateRevue($table, $id, $champs);
+            $result = $this->accessBDD->updateRevue($id, $champs);
         }elseif ($table == "commandedocument"){
-            $result = $this->accessBDD->updateCommande($table, $id, $champs);
+            $result = $this->accessBDD->updateCommande($id, $champs);
         }else{
             $result = $this->accessBDD->updateOne($table, $id, $champs);
         }	

@@ -241,7 +241,7 @@ class AccessBDD {
         return $this->conn->query($req, $param);
     }		
 
-    /**
+     /**
      * suppresion d'une ou plusieurs lignes dans une table
      * @param string $table nom de la table
      * @param array $champs nom et valeur de chaque champs
@@ -262,7 +262,13 @@ class AccessBDD {
         }
     }
 
-    public function deleteLivre($table, $champs)
+     /**
+     * Suppresion de l'entitée composée livre dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function deleteLivre($champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -281,7 +287,13 @@ class AccessBDD {
         return $this->delete("document", $champsDocument);
     }
 
-    public function deleteDvd($table, $champs)
+     /**
+     * Suppresion de l'entitée composée Dvd dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function deleteDvd($champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -300,7 +312,13 @@ class AccessBDD {
         return $this->delete("document", $champsDocument);
     }
 
-    public function deleteCommande($table, $champs)
+    /**
+     * Suppresion de l'entitée composée commandeDocument dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function deleteCommande($champs)
     {
         $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
             "montant" => $champs["Montant"]];
@@ -313,7 +331,13 @@ class AccessBDD {
         return  $this->delete( "commande", $champsCommande);
     }
 
-    public function deleteRevue($table, $champs)
+     /**
+     * Suppresion de l'entitée composée revue dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function deleteRevue($champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -355,8 +379,13 @@ class AccessBDD {
         }
     }
 
-
-    public function insertLivre($table, $champs)
+    /**
+     * Ajout de l'entitée composée livre dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function insertLivre($champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -375,7 +404,13 @@ class AccessBDD {
         return $this->insertOne("livre", $champsLivre);
     }
 
-    public function insertDvd($table, $champs)
+    /**
+     * Ajout de l'entitée composée Dvd dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function insertDvd($champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -394,7 +429,13 @@ class AccessBDD {
         return $this->insertOne("dvd", $champsDvd);
     }
 
-    public function insertCommande($table, $champs)
+     /**
+     * Ajout de l'entitée composée commandeDocument dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function insertCommande($champs)
     {
         $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
             "montant" => $champs["Montant"]];
@@ -407,7 +448,13 @@ class AccessBDD {
         return  $this->insertOne( "commandedocument", $champsCommandeDocument);
     }
 
-    public function insertRevue($table, $champs)
+     /**
+     * Ajout de l'entitée composée revue dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function insertRevue($champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -420,8 +467,6 @@ class AccessBDD {
         }
         return  $this->insertOne( "revue", $champsRevue);
     }
-
-
 
     /**
      * modification d'une ligne dans une table
@@ -447,7 +492,14 @@ class AccessBDD {
         }
     }
 
-    public function updateLivre($table, $id, $champs)
+     /**
+     * Modification de l'entitée composée livre dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @param [type] $id de l'element
+     * @return true si l'ajout a fonctionné
+     */
+    public function updateLivre($id, $champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -466,7 +518,14 @@ class AccessBDD {
         return $this->updateOne("livre", $id, $champsLivre);
     }
 
-    public function updateDvd($table, $id, $champs)
+    /**
+     * Modification de l'entitée composée Dvd dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @param [type] $id de l'element
+     * @return true si l'ajout a fonctionné
+     */
+    public function updateDvd($id, $champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
@@ -485,7 +544,14 @@ class AccessBDD {
         return $this->updateOne("dvd", $id, $champsDvd);
     }
 
-    public function updateCommande($table, $id, $champs)
+    /**
+     * Modification de l'entitée composée CommandeDocument dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @param [type] $id de l'element
+     * @return true si l'ajout a fonctionné
+     */
+    public function updateCommande($id, $champs)
     {
         $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
             "montant" => $champs["Montant"]];
@@ -498,7 +564,14 @@ class AccessBDD {
         return  $this->updateOne( "commandedocument",$id, $champsCommandeDocument);
     }
 
-    public function updateRevue($table, $id, $champs)
+     /**
+     * Modification de l'entitée composée revue dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @param [type] $id de l'element
+     * @return true si l'ajout a fonctionné
+     */
+    public function updateRevue($id, $champs)
     {
         $champsDocument = [ "id" => $champs["Id"], "titre" => $champs["Titre"],
             "image" => $champs["Image"] , "idRayon" => $champs["IdRayon"],
