@@ -68,6 +68,8 @@ class Controle{
             $result = $this->accessBDD->deleteRevue($champs);
         }elseif ($table == "commandedocument"){
             $result = $this->accessBDD->deleteCommande($champs);
+        }elseif ($table == "abonnement"){
+            $result = $this->accessBDD->deleteAbonnement($champs);
         }else{
             $result = $this->accessBDD->delete($table, $champs);
         }
@@ -92,6 +94,8 @@ class Controle{
             $result = $this->accessBDD->insertRevue($champs);
         }elseif ($table == "commandedocument"){
             $result = $this->accessBDD->insertCommande($champs);
+        }elseif ($table == "abonnement"){
+            $result = $this->accessBDD->insertAbonnement($champs);
         }else{
             $result = $this->accessBDD->insertOne($table, $champs);	
         }
@@ -118,6 +122,8 @@ class Controle{
             $result = $this->accessBDD->updateRevue($id, $champs);
         }elseif ($table == "commandedocument"){
             $result = $this->accessBDD->updateCommande($id, $champs);
+        }elseif ($table == "abonnement"){
+            $result = $this->accessBDD->updateAbonnement($id, $champs);
         }else{
             $result = $this->accessBDD->updateOne($table, $id, $champs);
         }	

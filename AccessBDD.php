@@ -76,6 +76,8 @@ class AccessBDD {
                     return $this->selectExemplairesRevue($champs['id']);
                 case "commandedocument" :
                     return $this->selectCommandesDocument($champs['idLivreDvd']);
+                case "abonnements" :
+                    return $this->selectAbonnementsRevue($champs['idRevue']);
                 default:                    
                     // cas d'un select sur une table avec recherche sur des champs
                     return $this->selectTableOnConditons($table, $champs);					
@@ -181,6 +183,24 @@ class AccessBDD {
         $req .= "where e.id = :id ";
         $req .= "order by e.dateAchat DESC";		
         return $this->conn->query($req, $param);
+    }
+
+    /**
+     * récupération de tous les abonnements d'une revue
+     *
+     * @param [type] $idRevue
+     * @return void
+     */
+    public function selectAbonnementsRevue($idRevue){
+        $param = array(
+            "idRevue" => $idRevue
+        );
+        $req = "Select a.id, c.dateCommande, c.montant, a.dateFinAbonnement, a.idRevue ";
+        $req .= "from abonnement a join commande c on a.id=c.id ";
+        $req .= "where a.idRevue = :idRevue ";
+        $req .= "order by c.dateCommande DESC";	
+        return $this->conn->query($req, $param);
+
     }
 
     /**
@@ -352,6 +372,25 @@ class AccessBDD {
     }
 
     /**
+     * Suppresion de l'entitée composée abonnement dans la bdd
+     *
+     * @param [type] $champs nom et valeur de chaque champs de la ligne
+     * @return true si l'ajout a fonctionné
+     */
+    public function deleteAbonnement($champs)
+    {
+        $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
+            "montant" => $champs["Montant"]];
+        $champsAbonnement = [ "id" => $champs["Id"], "dateFinAbonnement" => $champs["DateFinAbonnement"],
+                "idRevue" => $champs["IdRevue"]];
+        $result = $this->delete("abonnement", $champsAbonnement);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->delete( "commande", $champsCommande);
+    }
+
+    /**
      * ajout d'une ligne dans une table
      * @param string $table nom de la table
      * @param array $champs nom et valeur de chaque champs de la ligne
@@ -469,6 +508,25 @@ class AccessBDD {
     }
 
     /**
+     * Ajout de l'entitée composée abonnement dans la bdd
+     *
+     * @param [type] $champs
+     * @return void
+     */
+    public function insertAbonnement($champs)
+    {
+        $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
+            "montant" => $champs["Montant"]];
+        $champsAbonnement = [ "id" => $champs["Id"], "dateFinAbonnement" => $champs["DateFinAbonnement"],
+                "idRevue" => $champs["IdRevue"]];
+        $result = $this->insertOne("commande", $champsCommande);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->insertOne( "abonnement", $champsAbonnement);         
+    }
+
+    /**
      * modification d'une ligne dans une table
      * @param string $table nom de la table
      * @param string $id id de la ligne à modifier
@@ -583,6 +641,26 @@ class AccessBDD {
             return null;
         }
         return  $this->updateOne( "revue",$id, $champsRevue);
+    }
+
+    /**
+     * Modification de l'entitée composée abonnement dans la bdd
+     *
+     * @param [type] $id
+     * @param [type] $champs
+     * @return void
+     */
+    public function updateAbonnement($id, $champs)
+    {
+        $champsCommande = [ "id" => $champs["Id"], "dateCommande" => $champs["DateCommande"],
+            "montant" => $champs["Montant"]];
+        $champsAbonnement = [ "id" => $champs["Id"], "dateFinAbonnement" => $champs["DateFinAbonnement"],
+                "idRevue" => $champs["IdRevue"]];
+        $result = $this->updateOne("commande", $id, $champsCommande);
+        if ($result == null || $result == false){
+            return null;
+        }
+        return  $this->updateOne( "abonnement",$id, $champsAbonnement);
     }
 
 }
