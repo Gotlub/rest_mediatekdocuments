@@ -3,7 +3,7 @@ Cette API est utilisée par l'application MediatekDocuments écrite en C# et ré
 https://github.com/Gotlub/MediatekDocuments<br>
 
 ## Présentation
-[Page de presentation de l'API](https://github.com/Gotlub/rest_mediatekdocuments)
+[Page de presentation du projet](https://www.nicolasfrere.fr/pages/mediatekDocuments.html)
 
 Cette API, écrite en PHP, permet d'exécuter des requêtes SQL sur la BDD Mediatek86 créée avec le SGBDR MySQL.<br>
 Elle est accessible via une authentification "basique" (avec login="admin", pwd="adminpwd").<br>
