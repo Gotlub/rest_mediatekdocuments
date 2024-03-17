@@ -1,11 +1,16 @@
 # rest_mediatekdocuments
 Cette API est utilisée par l'application MediatekDocuments écrite en C# et récupérable dans le dépôt suivant :<br>
-https://github.com/CNED-SLAM/MediaTekDocuments<br>
-Le readme présente l'application et aussi le rôle de l'API.
+https://github.com/Gotlub/MediatekDocuments<br>
+
 ## Présentation
+[Page de presentation de l'API](https://github.com/Gotlub/rest_mediatekdocuments)
+
 Cette API, écrite en PHP, permet d'exécuter des requêtes SQL sur la BDD Mediatek86 créée avec le SGBDR MySQL.<br>
 Elle est accessible via une authentification "basique" (avec login="admin", pwd="adminpwd").<br>
 Sa vocation actuelle est de répondre aux demandes de l'applicaton MediatekDocuments.
+
+Le projet est un fork de [rest_mediatekdocuments](https://github.com/CNED-SLAM/rest_mediatekdocuments), auquel des fonctionnalités ont été ajoutées.
+
 ## Fichiers de l'API
 Cette API contient les fichiers suivants :<br>
 - .htaccess : contient les règles de réécriture pour l'accès à mediatekdocuments.php avec les bons paramètres.<br>
@@ -17,5 +22,4 @@ Cette API contient les fichiers suivants :<br>
 Pour tester l'application MediatekDocuments en local, il faut aussi installer l'API. Voici le mode opératoire :<br>
 - Installer les outils nécessaires (WampServer ou équivalent, Netbeans ou équivalent, Postman pour les tests).<br>
 - Télécharger le zip du code de l'API et le dézipper dans le dossier www de wampserver (renommer le dossier en "rest_mediatekdocuments", donc en enlevant "_master").<br>
-- Récupérer le script metiak86.sql en racine du projet puis, avec phpMyAdmin, créer la BDD mediatek86 et, dans cette BDD, exécuter le script pour remplir la BDD.<br>
-- Ouvrir l'API dans Netbeans pour pouvoir analyser le code et le faire évoluer suivant les besoins.
+- Récupérer le script Mission4.sql en racine du projet puis, avec phpMyAdmin, créer la BDD mediatek86 et, dans cette BDD, exécuter le script pour remplir la BDD.<br>
