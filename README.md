@@ -23,3 +23,7 @@ Pour tester l'application MediatekDocuments en local, il faut aussi installer l'
 - Installer les outils nécessaires (WampServer ou équivalent, Netbeans ou équivalent, Postman pour les tests).<br>
 - Télécharger le zip du code de l'API et le dézipper dans le dossier www de wampserver (renommer le dossier en "rest_mediatekdocuments", donc en enlevant "_master").<br>
 - Récupérer le script Mission4.sql en racine du projet puis, avec phpMyAdmin, créer la BDD mediatek86 et, dans cette BDD, exécuter le script pour remplir la BDD.<br>
+
+## Gestion des utilisateurs
+![img1](https://raw.githubusercontent.com/Gotlub/MediatekDocuments/main/images/ap3Utilisateurs.png)
+<br>La base de données dispose de quatre utilisateurs de service différents, leur mot de passe et "password".
