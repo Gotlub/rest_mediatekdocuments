@@ -26,4 +26,4 @@ Pour tester l'application MediatekDocuments en local, il faut aussi installer l'
 
 ## Gestion des utilisateurs
 ![img1](https://raw.githubusercontent.com/Gotlub/MediatekDocuments/main/images/ap3Utilisateurs.png)
-<br>La base de données dispose de quatre utilisateurs de service différents, leur mot de passe et "password".
+<br>La base de données dispose de quatre utilisateurs de service différents, leur mot de passe est "password".
